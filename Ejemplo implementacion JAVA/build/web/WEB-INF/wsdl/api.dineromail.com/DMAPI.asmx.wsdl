@@ -1,0 +1,1090 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="https://api.dineromail.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="https://api.dineromail.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="https://api.dineromail.com/">
+      <s:element name="GetBalance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="APICredential">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="APIUserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="APIPassword" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="userPrefs" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SessionID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMOTE_HOST" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_ACCEPT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_ACCEPT_ENCODING" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_ACCEPT_CHARSET" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_USER_AGENT" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_ACCEPT_LANGUAGE" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="REMOTE_ADDR" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_REFERER" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="HTTP_CONNECTION" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetBalanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBalanceResult" type="tns:ResultGetBalance" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultGetBalance">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Balance" type="tns:ArrayOfBalance" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GetBalanceStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBalance">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Balance" nillable="true" type="tns:Balance" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Balance">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GetBalanceStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SendMoney">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ToEmail" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PayOff" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendMoneyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SendMoneyResult" type="tns:ResultSendMoney" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultSendMoney">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:SendMoneyStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="SendMoneyStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+          <s:enumeration value="PENDING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoPaymentWithReference">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:Buyer" />
+            <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Item" nillable="true" type="tns:Item" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Item">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Code" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Quantity" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Buyer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentTypeAbbreviation" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DoPaymentWithReferenceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoPaymentWithReferenceResult" type="tns:ResultDoPaymentWithReference" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultDoPaymentWithReference">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VoucherUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BarcodeImageUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BarcodeDigits" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:DoPaymentWithReferenceStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DoPaymentWithReferenceStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoPaymentWithBankTransfer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:Buyer" />
+            <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankTransferData" type="tns:BankTransferData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantUrlRedirect" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantUrlNotification" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="BankTransferData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AccountNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountOwnerFirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountOwnerLastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressComplement" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Neighborhood" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AccountType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Bank" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DoPaymentWithBankTransferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoPaymentWithBankTransferResult" type="tns:ResultDoPaymentWithBankTransfer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultDoPaymentWithBankTransfer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentInitializeUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:DoPaymentWithBankTransferStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DoPaymentWithBankTransferStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+          <s:enumeration value="PENDING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoPaymentWithDirectBankTransfer">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:Buyer" />
+            <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankTransferData" type="tns:BankTransferData" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoPaymentWithDirectBankTransferResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoPaymentWithDirectBankTransferResult" type="tns:ResultDoPaymentWithDirectBankTransfer" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultDoPaymentWithDirectBankTransfer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Instructions" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:DoPaymentWithDirectBankTransferStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DoPaymentWithDirectBankTransferStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+          <s:enumeration value="PENDING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetPaymentTicket">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPaymentTicketResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPaymentTicketResult" type="tns:ResultGetPaymentTicket" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultGetPaymentTicket">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VoucherUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BarcodeImageUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BarcodeDigits" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GetPaymentTicketStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GetPaymentTicketStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoWithDraw">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Method" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AddressDetail" type="tns:AddressDetail" />
+            <s:element minOccurs="0" maxOccurs="1" name="BankAccountDetail" type="tns:BankAccountDetail" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AddressDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Floor" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Appartment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BankAccountDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Bank" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Branch" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="BankNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DoWithDrawResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoWithDrawResult" type="tns:ResultDoWithDraw" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultDoWithDraw">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:DoWithDrawStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DoWithDrawStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+          <s:enumeration value="PENDING" />
+          <s:enumeration value="PROCESING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetOperations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OperationId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="EndDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOperationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOperationsResult" type="tns:ResultGetOperations" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultGetOperations">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Operations" type="tns:ArrayOfOperationDetail" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:GetOperationsStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOperationDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationDetail" nillable="true" type="tns:OperationDetail" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Date" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="State" type="tns:OperationDetailState" />
+          <s:element minOccurs="0" maxOccurs="1" name="Number" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:OperationBuyer" />
+          <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="NetAmount" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentMethod" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Shares" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfOperationItem" />
+          <s:element minOccurs="0" maxOccurs="1" name="Seller" type="tns:OperationSeller" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrencyId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="OperationDetailState">
+        <s:restriction base="s:string">
+          <s:enumeration value="PENDING" />
+          <s:enumeration value="ACCREDITED" />
+          <s:enumeration value="CANCELED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="OperationBuyer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOperationItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OperationItem" nillable="true" type="tns:OperationItem" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="UnitPrice" type="s:decimal" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OperationSeller">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentType" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="AccountId" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="CountryId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="GetOperationsStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoPaymentWithCreditCard">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:Buyer" />
+            <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCard" type="tns:CreditCard" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CreditCard">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Installment" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CreditCardNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Holder" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExpirationDate" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SecurityCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="DocumentNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AddressComplement" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ZipCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Neighborhood" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" default="0" name="BankId" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DoPaymentWithCreditCardResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoPaymentWithCreditCardResult" type="tns:ResultDoPaymentWithCreditCard" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultDoPaymentWithCreditCard">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="VoucherUrl" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:DoPaymentWithCreditCardStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DoPaymentWithCreditCardStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+          <s:enumeration value="PENDING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="DoPaymentWithCreditCardThirdParty">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Items" type="tns:ArrayOfItem" />
+            <s:element minOccurs="0" maxOccurs="1" name="Buyer" type="tns:Buyer" />
+            <s:element minOccurs="0" maxOccurs="1" name="Provider" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CreditCard" type="tns:CreditCard" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantUrlRedirect" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantUrlNotification" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoPaymentWithCreditCardThirdPartyResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoPaymentWithCreditCardThirdPartyResult" type="tns:ResultDoPaymentWithCreditCardThirdParty" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultDoPaymentWithCreditCardThirdParty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PaymentInitializeUrl" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:DoPaymentWithCreditCardThirdPartyStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="DoPaymentWithCreditCardThirdPartyStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+          <s:enumeration value="PENDING" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="Refund">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="RefundResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RefundResult" type="tns:ResultRefund" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultRefund">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:RefundStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RefundStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="PENDING" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetRefundStatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+            <s:element minOccurs="1" maxOccurs="1" name="Crypt" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="RefundedMerchantTransactionId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Hash" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRefundStatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRefundStatusResult" type="tns:ResultGetRefundStatus" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResultGetRefundStatus">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:ResultGetRefundStatusStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="RefundTransactions" type="tns:ArrayOfRefundTransaction" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ResultGetRefundStatusStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="OK" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfRefundTransaction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RefundTransaction" nillable="true" type="tns:RefundTransaction" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RefundTransaction">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MerchantTransactionId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Currency" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Country" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Subject" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="UniqueMessageId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="tns:RefundTransactionStatus" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RefundTransactionStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="COMPLETED" />
+          <s:enumeration value="PENDING" />
+          <s:enumeration value="ERROR" />
+          <s:enumeration value="DENIED" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UserRefundAccess">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Credential" type="tns:APICredential" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserRefundAccessResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UserRefundAccessResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetBalanceSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBalance" />
+  </wsdl:message>
+  <wsdl:message name="GetBalanceSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBalanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SendMoneySoapIn">
+    <wsdl:part name="parameters" element="tns:SendMoney" />
+  </wsdl:message>
+  <wsdl:message name="SendMoneySoapOut">
+    <wsdl:part name="parameters" element="tns:SendMoneyResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithReferenceSoapIn">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithReference" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithReferenceSoapOut">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithReferenceResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithBankTransferSoapIn">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithBankTransfer" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithBankTransferSoapOut">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithBankTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithDirectBankTransferSoapIn">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithDirectBankTransfer" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithDirectBankTransferSoapOut">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithDirectBankTransferResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentTicketSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPaymentTicket" />
+  </wsdl:message>
+  <wsdl:message name="GetPaymentTicketSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPaymentTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoWithDrawSoapIn">
+    <wsdl:part name="parameters" element="tns:DoWithDraw" />
+  </wsdl:message>
+  <wsdl:message name="DoWithDrawSoapOut">
+    <wsdl:part name="parameters" element="tns:DoWithDrawResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOperationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOperations" />
+  </wsdl:message>
+  <wsdl:message name="GetOperationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOperationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithCreditCardSoapIn">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithCreditCard" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithCreditCardSoapOut">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithCreditCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithCreditCardThirdPartySoapIn">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithCreditCardThirdParty" />
+  </wsdl:message>
+  <wsdl:message name="DoPaymentWithCreditCardThirdPartySoapOut">
+    <wsdl:part name="parameters" element="tns:DoPaymentWithCreditCardThirdPartyResponse" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapIn">
+    <wsdl:part name="parameters" element="tns:Refund" />
+  </wsdl:message>
+  <wsdl:message name="RefundSoapOut">
+    <wsdl:part name="parameters" element="tns:RefundResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundStatusSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRefundStatus" />
+  </wsdl:message>
+  <wsdl:message name="GetRefundStatusSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRefundStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="UserRefundAccessSoapIn">
+    <wsdl:part name="parameters" element="tns:UserRefundAccess" />
+  </wsdl:message>
+  <wsdl:message name="UserRefundAccessSoapOut">
+    <wsdl:part name="parameters" element="tns:UserRefundAccessResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DMAPISoap">
+    <wsdl:operation name="GetBalance">
+      <wsdl:input message="tns:GetBalanceSoapIn" />
+      <wsdl:output message="tns:GetBalanceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMoney">
+      <wsdl:input message="tns:SendMoneySoapIn" />
+      <wsdl:output message="tns:SendMoneySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithReference">
+      <wsdl:input message="tns:DoPaymentWithReferenceSoapIn" />
+      <wsdl:output message="tns:DoPaymentWithReferenceSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithBankTransfer">
+      <wsdl:input message="tns:DoPaymentWithBankTransferSoapIn" />
+      <wsdl:output message="tns:DoPaymentWithBankTransferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithDirectBankTransfer">
+      <wsdl:input message="tns:DoPaymentWithDirectBankTransferSoapIn" />
+      <wsdl:output message="tns:DoPaymentWithDirectBankTransferSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentTicket">
+      <wsdl:input message="tns:GetPaymentTicketSoapIn" />
+      <wsdl:output message="tns:GetPaymentTicketSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoWithDraw">
+      <wsdl:input message="tns:DoWithDrawSoapIn" />
+      <wsdl:output message="tns:DoWithDrawSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOperations">
+      <wsdl:input message="tns:GetOperationsSoapIn" />
+      <wsdl:output message="tns:GetOperationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithCreditCard">
+      <wsdl:input message="tns:DoPaymentWithCreditCardSoapIn" />
+      <wsdl:output message="tns:DoPaymentWithCreditCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithCreditCardThirdParty">
+      <wsdl:input message="tns:DoPaymentWithCreditCardThirdPartySoapIn" />
+      <wsdl:output message="tns:DoPaymentWithCreditCardThirdPartySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <wsdl:input message="tns:RefundSoapIn" />
+      <wsdl:output message="tns:RefundSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundStatus">
+      <wsdl:input message="tns:GetRefundStatusSoapIn" />
+      <wsdl:output message="tns:GetRefundStatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UserRefundAccess">
+      <wsdl:input message="tns:UserRefundAccessSoapIn" />
+      <wsdl:output message="tns:UserRefundAccessSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DMAPISoap" type="tns:DMAPISoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBalance">
+      <soap:operation soapAction="https://api.dineromail.com/GetBalance" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMoney">
+      <soap:operation soapAction="https://api.dineromail.com/SendMoney" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithReference">
+      <soap:operation soapAction="https://api.dineromail.com/DoPaymentWithReference" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithBankTransfer">
+      <soap:operation soapAction="https://api.dineromail.com/DoPaymentWithBankTransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithDirectBankTransfer">
+      <soap:operation soapAction="https://api.dineromail.com/DoPaymentWithDirectBankTransfer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentTicket">
+      <soap:operation soapAction="https://api.dineromail.com/GetPaymentTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoWithDraw">
+      <soap:operation soapAction="https://api.dineromail.com/DoWithDraw" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOperations">
+      <soap:operation soapAction="https://api.dineromail.com/GetOperations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithCreditCard">
+      <soap:operation soapAction="https://api.dineromail.com/DoPaymentWithCreditCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithCreditCardThirdParty">
+      <soap:operation soapAction="https://api.dineromail.com/DoPaymentWithCreditCardThirdParty" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap:operation soapAction="https://api.dineromail.com/Refund" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundStatus">
+      <soap:operation soapAction="https://api.dineromail.com/GetRefundStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRefundAccess">
+      <soap:operation soapAction="https://api.dineromail.com/UserRefundAccess" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DMAPISoap12" type="tns:DMAPISoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetBalance">
+      <soap12:operation soapAction="https://api.dineromail.com/GetBalance" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMoney">
+      <soap12:operation soapAction="https://api.dineromail.com/SendMoney" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithReference">
+      <soap12:operation soapAction="https://api.dineromail.com/DoPaymentWithReference" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithBankTransfer">
+      <soap12:operation soapAction="https://api.dineromail.com/DoPaymentWithBankTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithDirectBankTransfer">
+      <soap12:operation soapAction="https://api.dineromail.com/DoPaymentWithDirectBankTransfer" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPaymentTicket">
+      <soap12:operation soapAction="https://api.dineromail.com/GetPaymentTicket" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoWithDraw">
+      <soap12:operation soapAction="https://api.dineromail.com/DoWithDraw" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOperations">
+      <soap12:operation soapAction="https://api.dineromail.com/GetOperations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithCreditCard">
+      <soap12:operation soapAction="https://api.dineromail.com/DoPaymentWithCreditCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoPaymentWithCreditCardThirdParty">
+      <soap12:operation soapAction="https://api.dineromail.com/DoPaymentWithCreditCardThirdParty" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Refund">
+      <soap12:operation soapAction="https://api.dineromail.com/Refund" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRefundStatus">
+      <soap12:operation soapAction="https://api.dineromail.com/GetRefundStatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UserRefundAccess">
+      <soap12:operation soapAction="https://api.dineromail.com/UserRefundAccess" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DMAPI">
+    <wsdl:port name="DMAPISoap" binding="tns:DMAPISoap">
+      <soap:address location="https://api.dineromail.com/DMAPI.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DMAPISoap12" binding="tns:DMAPISoap12">
+      <soap12:address location="https://api.dineromail.com/DMAPI.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
